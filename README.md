@@ -1,4 +1,4 @@
-# STRYD — Shoe Brand Landing Page
+# Amna Riz Shoe Company — Shoe Brand Landing Page
 
 A single-page shoe brand website built with vanilla HTML, CSS, and JavaScript.
 

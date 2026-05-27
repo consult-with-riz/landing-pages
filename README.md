@@ -9,6 +9,8 @@ https://consult-with-riz.github.io/landing-pages/LP-1-ops-behind-founder.html
 
 https://consult-with-riz.github.io/landing-pages/LP-2-about-to-fire-founder.html
 
+https://consult-with-riz.github.io/landing-pages/LP-3-duct-tape-stack-founder.html
+
 ## Features
 
 - Custom animated cursor with lag ring

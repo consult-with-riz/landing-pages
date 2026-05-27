@@ -2,7 +2,7 @@
 
 A single-page shoe brand website built with vanilla HTML, CSS, and JavaScript.
 
-**Live demo → [consult-with-riz.github.io/landing-pages/shoe-brand.html](https://consult-with-riz.github.io/landing-pages/shoe-brand.html)**
+**Live demo → https://consult-with-riz.github.io/landing-pages/shoe-brand.html
 
 
 https://consult-with-riz.github.io/landing-pages/LP-1-ops-behind-founder.html

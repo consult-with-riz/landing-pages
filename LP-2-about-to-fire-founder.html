@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soch — Before You Hire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #EA6A47;
+    --coral-dark: #C9522F;
+    --coral-light: #FDF0EB;
+    --charcoal: #1E1E1E;
+    --mid: #5A5A5A;
+    --cream: #FDFAF6;
+    --border: #E8E2D9;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--charcoal);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  nav {
+    padding: 20px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: white;
+  }
+  .logo span { color: var(--coral); }
+
+  .nav-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* HERO — full bleed dark */
+  .hero {
+    padding: 80px 56px 72px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(234,106,71,0.12);
+    border: 1px solid rgba(234,106,71,0.25);
+    color: var(--coral);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 62px);
+    line-height: 1.08;
+    letter-spacing: -1px;
+    color: white;
+    margin-bottom: 24px;
+  }
+
+  h1 .accent { color: var(--coral); font-style: italic; }
+
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .math-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--coral);
+    padding: 24px 28px;
+    border-radius: 2px;
+  }
+
+  .math-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .math-row:last-child { border-bottom: none; }
+
+  .math-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+  }
+
+  .math-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .math-value.strike {
+    text-decoration: line-through;
+    color: rgba(255,255,255,0.3);
+    font-weight: 400;
+  }
+
+  .math-value.coral { color: var(--coral); }
+
+  .math-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .math-total-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .math-total-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--coral);
+  }
+
+  /* FORM CARD — light on dark bg */
+  .form-card {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 40px 36px;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 80px;
+  }
+
+  .form-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 10px;
+  }
+
+  .form-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+
+  .form-card .sub {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .field { margin-bottom: 14px; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--mid);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--charcoal);
+    background: white;
+    outline: none;
+    transition: border-color 0.15s;
+    appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--coral);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--coral);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--coral-dark); }
+
+  .form-note {
+    font-size: 11px;
+    color: #AAAAAA;
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+  .check-circle {
+    width: 48px;
+    height: 48px;
+    background: var(--coral);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 20px;
+    color: white;
+  }
+  .success-state h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+  }
+  .success-state p {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .cal-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--charcoal);
+    color: white;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* THREE OUTCOMES */
+  .outcomes-section {
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 72px 0;
+  }
+
+  .outcomes-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 20px;
+  }
+
+  .outcomes-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: white;
+    margin-bottom: 48px;
+    line-height: 1.2;
+    max-width: 600px;
+  }
+
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .outcome-card {
+    padding: 32px 28px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .outcome-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-style: italic;
+    color: var(--coral);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .outcome-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .outcome-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* THE OFFER */
+  .offer-section {
+    padding: 72px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .offer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .offer-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 1.15;
+  }
+
+  .offer-section .desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .offer-box {
+    background: rgba(234,106,71,0.08);
+    border: 1px solid rgba(234,106,71,0.2);
+    border-radius: 4px;
+    padding: 36px;
+  }
+
+  .offer-box .price-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 8px;
+  }
+
+  .offer-box .price {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: white;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .offer-box .price-detail {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 28px;
+  }
+
+  .offer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+
+  .offer-item::before {
+    content: '✓';
+    color: var(--coral);
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .offer-guarantee {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.35s; }
+
+  @media (max-width: 860px) {
+    .hero, .offer-inner { grid-template-columns: 1fr; gap: 48px; }
+    nav, .hero, .outcomes-inner, .offer-inner, footer { padding-left: 24px; padding-right: 24px; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .form-card { position: static; }
+    h1 { font-size: 38px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Soch<span>.</span></div>
+  <span class="nav-tag">AI Workflow Automation</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="pill">Before you make that hire</div>
+    <h1>What if the role you're hiring for <span class="accent">shouldn't exist?</span></h1>
+    <p class="hero-sub">Before you commit to a $50,000+ annual salary to manage a manual process — spend 20 minutes with us first. We'll tell you honestly whether automation is the right call, or whether you need the hire.</p>
+
+    <div class="math-block">
+      <div class="math-row">
+        <span class="math-label">Annual ops coordinator salary</span>
+        <span class="math-value strike">$52,000</span>
+      </div>
+      <div class="math-row">
+        <span class="math-label">Soch Starter automation engagement</span>
+        <span class="math-value">$2,500</span>
+      </div>
+      <div class="math-row">
+        <span class="math-label">Delivery time</span>
+        <span class="math-value">2 weeks</span>
+      </div>
+      <div class="math-total">
+        <span class="math-total-label">Potential annual saving</span>
+        <span class="math-total-value coral">$49,500</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <div class="form-label">Free 20-min call</div>
+    <h2>Let's look at the role first</h2>
+    <p class="sub">Tell us what you're hiring for. We'll tell you whether it should be automated instead.</p>
+
+    <form id="auditForm">
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" placeholder="Alex Chen" required>
+      </div>
+      <div class="field">
+        <label>Company</label>
+        <input type="text" placeholder="Acme Inc." required>
+      </div>
+      <div class="field">
+        <label>Role you're hiring for</label>
+        <input type="text" placeholder="e.g. Operations Coordinator" required>
+      </div>
+      <div class="field">
+        <label>What will this person mainly do?</label>
+        <textarea placeholder="e.g. Update our CRM, send weekly reports, manage client onboarding..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Get the honest answer →</button>
+    </form>
+
+    <div class="success-state" id="successState">
+      <div class="check-circle">✓</div>
+      <h3>Noted — pick a time</h3>
+      <p>We'll review what you've shared before the call so we come with a specific recommendation for your role.</p>
+      <a href="https://calendly.com/riz-withsoch/audit" class="cal-btn" target="_blank">Choose a Time →</a>
+    </div>
+
+    <p class="form-note">Honest answer guaranteed. If you need the hire, we'll tell you.</p>
+  </div>
+</section>
+
+<section class="outcomes-section">
+  <div class="outcomes-inner">
+    <p class="eyebrow">What comes out of the call</p>
+    <h2>Three possible outcomes. All of them useful.</h2>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-num">01</div>
+        <h3>You don't make the hire</h3>
+        <p>The process is fully automatable. We build it in two weeks. You save the salary and the onboarding time — and the automation runs without anyone managing it.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">02</div>
+        <h3>You hire — but smarter</h3>
+        <p>The role is real, but the manual parts can be automated first. Your new hire arrives to a cleaner job and spends their time on higher-value work from day one.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">03</div>
+        <h3>You need the hire — confirmed</h3>
+        <p>Not everything is automatable. If that's the case, we'll tell you clearly and you proceed knowing you made the right call — not just the default one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offer-section">
+  <div class="offer-inner">
+    <div>
+      <p class="eyebrow">The Starter Engagement</p>
+      <h2>One process. Automated. Two weeks.</h2>
+      <p class="desc">If the call shows that automation is the right move, our Starter engagement is designed for exactly this moment. One process, fully built and handed over, before you make a hire you might not need.</p>
+    </div>
+    <div class="offer-box">
+      <div class="price-label">Starter Engagement</div>
+      <div class="price">$2,500</div>
+      <div class="price-detail">One-time · 2 week delivery</div>
+      <div class="offer-item">One process audited end-to-end</div>
+      <div class="offer-item">Automation built using your existing tools</div>
+      <div class="offer-item">Full SOP + handover documentation</div>
+      <div class="offer-item">One round of revisions included</div>
+      <div class="offer-item">Audit fee credited against Core engagement</div>
+      <div class="offer-guarantee">"If it doesn't save you the equivalent of the hire cost within 90 days, the logic didn't hold — and at least you found out for $2,500 instead of $52,000."</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Soch<span>.</span></div>
+  <p>withsoch.com · riz@withsoch.com</p>
+</footer>
+
+<script>
+  document.getElementById('auditForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('auditForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soch — Connect Your Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #EA6A47;
+    --coral-dark: #C9522F;
+    --coral-muted: rgba(234,106,71,0.15);
+    --charcoal: #1A1A1A;
+    --mid: #5A5A5A;
+    --cream: #FDFAF6;
+    --light: #F4F0EB;
+    --border: #E5DED4;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  nav {
+    padding: 20px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--charcoal);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--coral); }
+
+  .nav-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 56px 72px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--coral-muted);
+    border: 1px solid rgba(234,106,71,0.2);
+    color: var(--coral-dark);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+  }
+
+  h1 .coral { color: var(--coral); }
+
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 520px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  /* TOOL FLOW VIZ */
+  .tool-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tool-chip {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+    white-space: nowrap;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  .tool-chip.broken {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool-chip.broken::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 4px,
+      rgba(234,106,71,0.08) 4px,
+      rgba(234,106,71,0.08) 8px
+    );
+  }
+
+  .gap-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .gap-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--coral);
+    white-space: nowrap;
+  }
+
+  .arrow-line {
+    width: 32px;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), var(--coral));
+    position: relative;
+  }
+
+  .arrow-line::after {
+    content: '→';
+    position: absolute;
+    right: -4px;
+    top: -9px;
+    font-size: 12px;
+    color: var(--coral);
+  }
+
+  .flow-caption {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #AAAAAA;
+    font-style: italic;
+  }
+
+  /* FORM CARD */
+  .form-card {
+    background: var(--charcoal);
+    border-radius: 4px;
+    padding: 40px 36px;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.12);
+    position: sticky;
+    top: 80px;
+  }
+
+  .form-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 10px;
+  }
+
+  .form-card h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: white;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+
+  .form-card .sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .field { margin-bottom: 14px; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: white;
+    background: rgba(255,255,255,0.06);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+  input:focus, textarea:focus {
+    border-color: var(--coral);
+    background: rgba(255,255,255,0.09);
+  }
+
+  textarea { resize: none; height: 80px; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--coral);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--coral-dark); }
+
+  .form-note {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+  .check-circle {
+    width: 48px;
+    height: 48px;
+    background: var(--coral);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 20px;
+    color: white;
+  }
+  .success-state h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 10px;
+  }
+  .success-state p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .cal-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: white;
+    color: var(--charcoal);
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* THE PROBLEM */
+  .problem-section {
+    background: var(--light);
+    border-top: 1px solid var(--border);
+    padding: 72px 0;
+  }
+
+  .problem-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 20px;
+  }
+
+  .problem-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--charcoal);
+    margin-bottom: 48px;
+    line-height: 1.1;
+    max-width: 640px;
+  }
+
+  .symptoms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .symptom {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .symptom-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--coral-muted);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .symptom h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .symptom p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* WHAT WE DO */
+  .solution-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 56px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .solution-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .solution-section p {
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .integration-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    position: relative;
+  }
+
+  .int-node {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .int-node .name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+
+  .int-node .role {
+    font-size: 11px;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  .int-center {
+    grid-column: span 2;
+    background: var(--charcoal);
+    padding: 20px;
+    text-align: center;
+    margin: 2px 0;
+  }
+
+  .int-center .name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+
+  .int-center .name span { color: var(--coral); }
+
+  .int-center .role {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .connector-row {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+  }
+
+  .connector {
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(to bottom, var(--border), var(--coral));
+    position: relative;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  footer p { font-size: 12px; color: #AAAAAA; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.35s; }
+
+  @media (max-width: 860px) {
+    .hero, .solution-section { grid-template-columns: 1fr; gap: 48px; }
+    nav, .hero, .problem-inner, .solution-section, footer { padding-left: 24px; padding-right: 24px; }
+    .symptoms-grid { grid-template-columns: 1fr; }
+    .form-card { position: static; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Soch<span>.</span></div>
+  <span class="nav-tag">AI Workflow Automation</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="tag-pill">Your tools aren't talking</div>
+    <h1>Five tools.<br><span class="coral">Zero integration.</span><br>One big problem.</h1>
+    <p class="hero-sub">Notion, HubSpot, Slack, Airtable — all running separately. Data lives in three places. Someone on your team is the human glue holding it together. That's the problem we fix.</p>
+
+    <div class="tool-flow">
+      <div class="tool-chip broken">HubSpot</div>
+      <div class="gap-arrow">
+        <div class="gap-label">gap</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="tool-chip broken">Notion</div>
+      <div class="gap-arrow">
+        <div class="gap-label">gap</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="tool-chip broken">Slack</div>
+      <div class="gap-arrow">
+        <div class="gap-label">gap</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="tool-chip broken">Airtable</div>
+    </div>
+    <p class="flow-caption">Replace tool names above with your actual stack — same problem, different labels.</p>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <div class="form-label">Free 20-min stack audit</div>
+    <h2>Tell us what you're working with</h2>
+    <p class="sub">List your tools. We'll tell you where the gaps are and what connecting them looks like.</p>
+
+    <form id="auditForm">
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" placeholder="Alex Chen" required>
+      </div>
+      <div class="field">
+        <label>Company</label>
+        <input type="text" placeholder="Acme Inc." required>
+      </div>
+      <div class="field">
+        <label>Tools in your stack</label>
+        <input type="text" placeholder="e.g. HubSpot, Notion, Slack, Stripe" required>
+      </div>
+      <div class="field">
+        <label>Biggest integration headache</label>
+        <textarea placeholder="e.g. Every time a deal closes in HubSpot, someone manually creates a Notion project and messages the team in Slack..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">See where the gaps are →</button>
+    </form>
+
+    <div class="success-state" id="successState">
+      <div class="check-circle">✓</div>
+      <h3>Got your stack</h3>
+      <p>We'll map the integration gaps before the call so we can show you exactly what connecting them looks like.</p>
+      <a href="https://calendly.com/riz-withsoch/audit" class="cal-btn" target="_blank">Choose a Time →</a>
+    </div>
+
+    <p class="form-note">No commitment. We'll tell you what we find — useful either way.</p>
+  </div>
+</section>
+
+<section class="problem-section">
+  <div class="problem-inner">
+    <p class="eyebrow">Recognise any of these?</p>
+    <h2>The symptoms of a disconnected stack.</h2>
+    <div class="symptoms-grid">
+      <div class="symptom">
+        <div class="symptom-icon">📋</div>
+        <div>
+          <h3>Data lives in multiple places</h3>
+          <p>The same client is in your CRM, your project tool, and a spreadsheet — and they're never quite in sync. Someone is always the source of truth and they hate it.</p>
+        </div>
+      </div>
+      <div class="symptom">
+        <div class="symptom-icon">🔁</div>
+        <div>
+          <h3>Manual handoffs between tools</h3>
+          <p>A deal closes → someone manually creates a project → someone else sends the welcome email → someone updates the tracker. Three humans doing one job.</p>
+        </div>
+      </div>
+      <div class="symptom">
+        <div class="symptom-icon">📊</div>
+        <div>
+          <h3>Reporting takes hours to pull</h3>
+          <p>The weekly report requires pulling data from three places, reformatting it in a spreadsheet, and hoping nothing's been updated since you started. Every. Single. Week.</p>
+        </div>
+      </div>
+      <div class="symptom">
+        <div class="symptom-icon">🧠</div>
+        <div>
+          <h3>Ops knowledge lives in heads</h3>
+          <p>When someone leaves, a process breaks. Because the process isn't documented anywhere — it's just what they knew to do. That's fragile at scale.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solution-section">
+  <div>
+    <p class="eyebrow">What we build</p>
+    <h2>The integration layer your stack is missing.</h2>
+    <p>We don't replace what you have. We connect it. Using n8n, the Anthropic API, and your existing tools, we build the automation layer that sits between everything and makes it work together.</p>
+    <p>Data flows automatically. Reports generate themselves. Handoffs happen without humans. And everything is documented so it doesn't live in anyone's head.</p>
+  </div>
+  <div class="integration-visual">
+    <div class="int-node">
+      <div class="name">HubSpot</div>
+      <div class="role">CRM</div>
+    </div>
+    <div class="int-node">
+      <div class="name">Notion</div>
+      <div class="role">Projects</div>
+    </div>
+    <div class="connector-row">
+      <div class="connector"></div>
+      <div class="connector"></div>
+    </div>
+    <div class="int-center">
+      <div class="name">Soch<span>.</span> Automation Layer</div>
+      <div class="role">n8n · Anthropic API · Your tools</div>
+    </div>
+    <div class="connector-row">
+      <div class="connector"></div>
+      <div class="connector"></div>
+    </div>
+    <div class="int-node">
+      <div class="name">Slack</div>
+      <div class="role">Comms</div>
+    </div>
+    <div class="int-node">
+      <div class="name">Airtable</div>
+      <div class="role">Data</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Soch<span>.</span></div>
+  <p>withsoch.com · riz@withsoch.com</p>
+</footer>
+
+<script>
+  document.getElementById('auditForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('auditForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

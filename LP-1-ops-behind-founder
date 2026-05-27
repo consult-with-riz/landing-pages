@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soch — Free Ops Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #EA6A47;
+    --coral-dark: #C9522F;
+    --coral-light: #FDF0EB;
+    --charcoal: #1E1E1E;
+    --mid: #4A4A4A;
+    --light: #F7F4F0;
+    --cream: #FDFAF6;
+    --border: #E8E2D9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--charcoal);
+    letter-spacing: -0.3px;
+  }
+  .logo span { color: var(--coral); }
+  .nav-tag {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 80px 48px 64px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .campaign-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--coral-light);
+    border: 1px solid #F0C4B4;
+    color: var(--coral-dark);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+  .campaign-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--coral);
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 520px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .proof-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .proof-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+  .proof-item::before {
+    content: '→';
+    color: var(--coral);
+    font-size: 13px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  /* FORM CARD */
+  .form-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px 36px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 80px;
+  }
+
+  .form-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 10px;
+  }
+
+  .form-card h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+
+  .form-card p {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .field {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--mid);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--charcoal);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.15s;
+    appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--coral);
+    background: white;
+  }
+
+  textarea { resize: none; height: 88px; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--coral);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--coral-dark); }
+  .submit-btn:active { transform: scale(0.99); }
+
+  .form-footer {
+    font-size: 11px;
+    color: #AAAAAA;
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: 1080px;
+    margin: 0 auto 0;
+    padding: 0 48px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* WHAT HAPPENS SECTION */
+  .what-section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 48px;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 20px;
+  }
+
+  .what-section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    color: var(--charcoal);
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .step {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+  }
+
+  .step-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 40px;
+    color: var(--coral);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* PROOF SECTION */
+  .proof-section {
+    background: var(--charcoal);
+    padding: 64px 0;
+  }
+
+  .proof-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .proof-section .section-eyebrow { color: var(--coral); margin-bottom: 20px; }
+
+  .proof-section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    color: white;
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .proof-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 32px;
+  }
+
+  .proof-card .outcome {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .proof-card .detail {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .proof-card .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 16px;
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .about-strip h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+  }
+
+  .about-strip p {
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .stat-box {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .stat-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 40px;
+    color: var(--coral);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  footer .logo { font-size: 18px; }
+  footer p { font-size: 12px; color: #AAAAAA; }
+
+  /* SUCCESS STATE */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .success-state .check {
+    width: 48px;
+    height: 48px;
+    background: var(--coral);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 22px;
+    color: white;
+  }
+
+  .success-state h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+  }
+
+  .success-state p {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .calendar-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--charcoal);
+    color: white;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.35s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding: 48px 24px; }
+    .form-card { position: static; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .proof-grid { grid-template-columns: 1fr; }
+    .about-strip { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px; }
+    nav { padding: 16px 24px; }
+    .what-section, .proof-inner { padding: 48px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Soch<span>.</span></div>
+  <span class="nav-tag">AI Workflow Automation</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="campaign-label">Free 20-minute audit</div>
+    <h1>Your ops are <em>behind.</em><br>Let's fix the right things first.</h1>
+    <p class="hero-sub">Your tools don't talk to each other. Your team is doing manual work that should be automated. You know it — you just haven't had time to fix it. We'll tell you exactly what to fix first, and why.</p>
+    <div class="proof-strip">
+      <div class="proof-item">No pitch deck. No fluff. Just a useful 20-minute conversation.</div>
+      <div class="proof-item">We look at your current stack and tell you the 2–3 highest-impact automations for your business.</div>
+      <div class="proof-item">You walk away with a clear picture — whether we work together or not.</div>
+    </div>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <div class="form-card-label">Book your free audit</div>
+    <h2>Tell us about your setup</h2>
+    <p>3 questions. Takes 60 seconds. Then pick a time that works.</p>
+
+    <form id="auditForm">
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" placeholder="Alex Chen" required>
+      </div>
+      <div class="field">
+        <label>Company</label>
+        <input type="text" placeholder="Acme Inc." required>
+      </div>
+      <div class="field">
+        <label>Biggest ops headache right now</label>
+        <textarea placeholder="e.g. Our CRM and Notion aren't connected, so someone manually updates both every day..." required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Book My Free Audit →</button>
+    </form>
+
+    <div class="success-state" id="successState">
+      <div class="check">✓</div>
+      <h3>Got it — pick a time below</h3>
+      <p>We've noted your setup. Choose a 20-minute slot and we'll come prepared with specific ideas for your stack.</p>
+      <a href="https://calendly.com/riz-withsoch/audit" class="calendar-btn" target="_blank">Choose a Time →</a>
+    </div>
+
+    <p class="form-footer">No spam. No obligation. Just a useful conversation.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="what-section">
+  <p class="section-eyebrow">What happens on the call</p>
+  <h2>A 20-minute call that actually moves the needle.</h2>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>We look at your stack</h3>
+      <p>Walk us through what tools you're using and how your team actually works day-to-day. No prep needed — we ask the right questions.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>We identify the friction</h3>
+      <p>We'll pinpoint the 2–3 places where manual work is costing you the most time, and tell you what automating each one looks like in practice.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>You leave with a clear picture</h3>
+      <p>Whether we work together or not, you'll know exactly what to fix first and roughly what it takes — in time, cost, and effort.</p>
+    </div>
+  </div>
+</section>
+
+<section class="proof-section">
+  <div class="proof-inner">
+    <p class="section-eyebrow">What clients have said</p>
+    <h2>What founders actually get out of working with us.</h2>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <span class="tag">Replaced a planned hire</span>
+        <div class="outcome">"We were about to bring on an ops coordinator. Soch automated the exact work we were hiring for in three weeks."</div>
+        <div class="detail">Founder, B2B SaaS — Seed stage. Saved an estimated $55,000 in annual salary costs.</div>
+      </div>
+      <div class="proof-card">
+        <span class="tag">Saved 12 hours/week</span>
+        <div class="outcome">"My team was spending half a day every week pulling data from three places to build a report. That's gone now."</div>
+        <div class="detail">Founder, Professional services — Pre-seed. Automated reporting pipeline connecting Airtable, Notion and Slack.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-strip">
+  <div>
+    <h2>Built by founders, for founders who are done doing things manually.</h2>
+    <p>Soch is an AI workflow automation consultancy. We work with B2B startup founders between pre-seed and Series A. We build automations using n8n, the Anthropic API, and the tools you already use — no rip and replace, no six-month implementation. We ship fast, document everything, and hand it over properly.</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-box">
+      <div class="stat-num">2–4</div>
+      <div class="stat-label">Weeks to first working automation</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">3–5</div>
+      <div class="stat-label">Workflows in a typical Core engagement</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Rip-and-replace. We use your existing stack.</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Documented + handed over on completion</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Soch<span>.</span></div>
+  <p>withsoch.com · riz@withsoch.com</p>
+</footer>
+
+<script>
+  document.getElementById('auditForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('auditForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+    // In GHL: replace this with GHL form submission + redirect to calendar step
+  });
+</script>
+
+</body>
+</html>
